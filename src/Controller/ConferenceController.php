@@ -2,33 +2,35 @@
 
 namespace App\Controller;
 
+use App\Entity\Conference;
+use App\Repository\CommentRepository;
+use App\Repository\ConferenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use function Twig\Tests\html;
 
 class ConferenceController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(Request $request): Response
+    public function index(ConferenceRepository $conferenceRepository): Response
     {
-        $gret = '';
+       return $this->render('conference/index.html.twig', [
+           'conferences' => $conferenceRepository->findAll(),
+       ]);
+    }
 
-        if ($name = $request->query->get('hello')) {
-            $gret = sprintf('<h1>Hello %s!</h1>', htmlspecialchars($name));
-        }
+    #[Route('/conference/{id}', name: 'conference')]
+    public function show(Conference $conference, CommentRepository $commentRepository, Request $request, int $id = null): Response
+    {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $commentRepository->getCommentPaginator($conference, $offset);
 
-        $request->request->get('name', 'foo');
-
-
-        return new Response(<<<EOF
-            <html>
-                <body>
-                    $gret
-                    <img src="/public/images/under-construction.gif"/>
-                </body>
-            </html>
-        EOF);
+        return $this->render('conference/show.html.twig', [
+            'conference' => $conference,
+            'comments' => $paginator,
+            'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
+        ]);
     }
 }
