@@ -15,15 +15,6 @@ class Conference
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $city = null;
-
-    #[ORM\Column(length: 4)]
-    private ?string $year = null;
-
-    #[ORM\Column]
-    private ?bool $isInternational = null;
-
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'conference', orphanRemoval: true)]
     private Collection $comments;
 
@@ -35,42 +26,6 @@ class Conference
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getYear(): ?string
-    {
-        return $this->year;
-    }
-
-    public function setYear(string $year): static
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    public function isIsInternational(): ?bool
-    {
-        return $this->isInternational;
-    }
-
-    public function setIsInternational(bool $isInternational): static
-    {
-        $this->isInternational = $isInternational;
-
-        return $this;
     }
 
     /**
