@@ -27,5 +27,8 @@
         {% else %}
             <div>No comments have been posted yet for this conference.</div>
         {% endif %}
+
+        <h3>Add your own feedback</h3>
+        {{ form(comment_form) }}
     </section>
 {% endblock %}
