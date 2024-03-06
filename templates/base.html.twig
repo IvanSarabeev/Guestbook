@@ -19,7 +19,7 @@
             <menu class="gap-3 d-flex align-items-center justify-content-center list-unstyled">
                 {% for conference in conferences %}
                     <li>
-                        <a class="text-decoration-none text-light fs-5 fw-semibold" href="{{ path('conference', {id: conference.id}) }}">
+                        <a class="text-decoration-none text-light fs-5 fw-semibold" href="{{ path('conference', {slug: conference.slug}) }}">
                             {{ conference }}
                         </a>
                     </li>

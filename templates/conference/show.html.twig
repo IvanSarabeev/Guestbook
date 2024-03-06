@@ -3,8 +3,8 @@
 {% block title %}Conference Guestbook - {{ conference }}{% endblock %}
 
 {% block body %}
-    <section class="container justify-content-center">
-        <h2>{{ conference }} Conference</h2>
+    <section class="container align-items-center justify-content-center mt-2 mt-md-3 mt-xl-5">
+        <h2 class="">{{ conference }} Conference</h2>
 
         {% if comments|length > 0 %}
             <div>There are {{ comments|length }} comments.</div>
@@ -18,11 +18,11 @@
             {% endfor %}
 
             {% if previous >= 0 %}
-                <a href="{{ path('conference', {id: conference.id, offset: previous}) }}">Previous</a>
+                <a href="{{ path('conference', {slug: conference.slug, offset: previous}) }}">Previous</a>
             {% endif %}
 
             {% if next < comments|length %}
-                <a href="{{ path('conference', {id: conference.id, offset:previous }) }}">Next</a>
+                <a href="{{ path('conference', {slug: conference.slug, offset:previous }) }}">Next</a>
             {% endif %}
         {% else %}
             <div>No comments have been posted yet for this conference.</div>
