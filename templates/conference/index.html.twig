@@ -3,16 +3,19 @@
 {% block title %}Conference Guestbook{% endblock %}
 
 {% block body %}
+    <section class="container justify-content-center">
+        <div class="example-wrapper">
+            <h2 class="fs-2 fw-semibold text-center mt-2 mt-lg-3 mt-xl-5">Give your feedback!</h2>
 
-<div class="example-wrapper">
-    <h2>Give your feedback!</h2>
+            <div class="">
+                {% for conference in conferences %}
+                    <h4>{{ conference }}</h4>
+                    <p>
+                        <a href="{{ path('conference', {id: conference.id}) }}">View</a>
+                    </p>
+                {% endfor %}
+            </div>
 
-    {% for conference in conferences %}
-        <h4>{{ conference }}</h4>
-        <p>
-            <a href="{{ path('conference', {id: conference.id}) }}">View</a>
-        </p>
-    {% endfor %}
-
-</div>
+        </div>
+    </section>
 {% endblock %}
