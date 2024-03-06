@@ -3,6 +3,6 @@ database:
     type: postgresql:16
     disk: 1024
 
-parameters:
-    photo_dir: "%kernel.project_dir%/public/uploads/photos"
+#parameters:
+#    photo_dir: "%kernel.project_dir%/public/uploads/photos"
 

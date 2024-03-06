@@ -34,7 +34,7 @@ class ConferenceController extends AbstractController
         Conference $conference,
         CommentRepository $commentRepository,
         ConferenceRepository $conferenceRepository,
-        #[Autowire('%photo_dir%')] string $photoDir,
+//        #[Autowire('%photo_dir%')] string $photoDir,
     ): Response
     {
         $comment = new Comment();
